@@ -5,5 +5,42 @@
 <div class="divPara">
     <p>We know it is challenging to cover all the important issues, to invest resources in research and disseminate important news quickly and accurately – especially for independent reporting trying to overcome the right-wing and conservative media paradigm.
 
-    So all articles published, can be republished for free, either translated or in the original language. You can use them for commercial and non-commercial purposes. You do not need to ask permission from or provide any credit.</p>
+    So all articles published, can be republished for free, either translated or in the original language. You can use them for commercial and non-commercial purposes. You do not need to ask permission from us or provide any credit.</p>
 </div>
+
+<h3>You can browse our newest article below.<br> Don't forget to click an article you like to open it in full view:</h3>
+
+<div class="wraper">
+<div class="gridContainer" >
+    <div *ngFor="let a of articles; let i = index" class="item{{i + 1}}">
+        <a class="button" [routerLink]="['checkarticle',a._id]" style="text-decoration:none; color:inherit">
+            <span style="text-decoration: underline;">Article Title</span>:  {{a.articleTitle}} <br>
+            <span style="text-decoration: underline;">Article SubTitle</span>: {{a.articleSubTitle}}<br>
+            <span style="text-decoration: underline;">Article Category</span>: {{a.articleCategory}}<br>
+            <span style="text-decoration: underline;">Article Author</span>: {{a.author}}
+        </a>
+        <br>
+        
+    </div>
+    </div>
+    <!-- <div class="item2">
+        Article Title: {{a.articleTitle}},
+        Article SubTitle: {{a.articleSubTitle}},
+        Article Category: {{a.articleCategory}},
+        Body: {{a.body}},
+        Article Author: {{a.author}}
+    </div> -->
+    <!-- div class="item3">3</div>  
+    <div class="item4">4</div>
+    <div class="item5">5</div>
+    <div class="item6">6</div> 
+    <div class="item7">7</div> 
+    <div class="item8">8</div> 
+    <div class="item9">9</div>  --> 
+</div>
+
+
+
+
+
+<!-- {{a.articleTitle}}{{a.articleSubTitle}}{{a.articleCategory}}{{a.author}} -->

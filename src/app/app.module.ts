@@ -12,6 +12,10 @@ import { ArticlesBodyComponent } from './articles-body/articles-body.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from './http.service';
 import { DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
+import { SigninComponent } from './signin/signin.component';
+import { CheckArticleComponent } from './check-article/check-article.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +23,19 @@ import { DatePipe } from '@angular/common';
     NavbarComponent,
     HomeComponent,
     ArticlesComponent,
-    ArticlesBodyComponent
+    ArticlesBodyComponent,
+    RegisterComponent,
+    SigninComponent,
+    CheckArticleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
+    
   ],
   providers: [
     HttpService,

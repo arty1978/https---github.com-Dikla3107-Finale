@@ -1,17 +1,17 @@
 <form *ngIf="form" class="frame" [formGroup]="form">
-    <h2 *ngIf="articles.id">Edit Article</h2>
-    <h2 *ngIf="!articles.id">Add Article</h2>
+    <h2 *ngIf="articles._id">Edit Article</h2>
+    <h2 *ngIf="!articles._id">Add Article</h2>
 
 
 <div>
-    <label class="field">Article Name</label>
-    <input type="text" formControlName="articleName">
+    <label class="field">Article Title:</label>
+    <input type="text" formControlName="articleTitle">
 </div>
 
 
 <div>
-    <label class="field">Article Category</label>
-    <input type="text" formControlName="articleCategory">
+    <label class="field">Article Subtitle:</label>
+    <input type="text" formControlName="articleSubTitle">
 </div>
 
 
@@ -27,37 +27,39 @@
 </div>
 
 
-<div>
+<!-- <div>
     <label class="field">Publish date:</label>
     <input type="text" formControlName="publishDate">
-</div>
+</div> -->
+
 
 <div class="field">
         <label>Content:</label>
-        <textarea formControlName="body" cols="30" rows="10"></textarea>
+        <textarea formControlName="body" cols="30" rows="10" class="ta"></textarea>
     </div>
 
 
-<input #imageInput [hidden]="true" type="file" (change)="imageChange()">
+<!-- <input #imageInput [hidden]="true" type="file" (change)="imageChange()">
+ -->
+    <!-- <div *ngIf="articles.imgId">
+        <img [src]="'http://localhost:4000/articles/image/' + articles.imgId" class="editImg" 
+        (click)="selectImage()">
+    </div> -->
 
-    <div *ngIf="articles.imgId">
-        <img [src]="'http://localhost:4000/articles/image/' + articles.imgId" class="editImg" (click)="selectImage()">
-    </div>
-
-    <div *ngIf="alternativeImage">
+    <!-- <div *ngIf="alternativeImage">
         <h3 *ngIf="articles.imgId">Change Image</h3>
         <img [src]="alternativeImage" class="editImg" (click)="selectImage()">
-    </div>
+    </div> -->
 
-    <div *ngIf="!articles.imgId && !alternativeImage" class="editImg">
+    <!-- <div *ngIf="!articles.imgId && !alternativeImage" class="editImg">
         <button (click)="selectImage()">Upload Image</button>
-    </div>
+    </div> -->
 
 
 
 
 <div class="field">
-        <button *ngIf="articles.id" (click)="update()" [disabled]="!form.valid">Save</button>
-        <button *ngIf="!articles.id" (click)="add()" [disabled]="!form.valid">Add</button>
+        <button *ngIf="articles._id" (click)="update()" [disabled]="!form.valid" class="BTN">Update</button>
+        <button *ngIf="!articles._id" (click)="add()" [disabled]="!form.valid" class="BTN">Add</button>
     </div>
 </form>

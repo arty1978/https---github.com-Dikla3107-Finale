@@ -6,19 +6,22 @@ import { Injectable } from '@angular/core';
 })
 
 export class HttpService{
-    private readonly url ='hhtp://localhost:4000';
+    private readonly url ='http://localhost:4000';
     private readonly  options = {withCredentials: true};
 
     get<T>(route: string){
         return this.httpClient.get<T>(`${this.url}/${route}`, this.options);
     }
 
-    post<T>(route: string){
-        return this.httpClient.post<T>(`${this.url}/${route}`, this.options);
+    post<T>(route: string, body: any){
+        console.log(route, body, 'httpService POST');
+        
+        return this.httpClient.post<T>(`${this.url}/${route}`,body, this.options);
+        
     }
 
-    put<T>(route: string){
-        return this.httpClient.put<T>(`${this.url}/${route}`, this.options);
+    put<T>(route: string, body: any){
+        return this.httpClient.put<T>(`${this.url}/${route}`, body, this.options);
     }
 
     delete<T>(route: string){

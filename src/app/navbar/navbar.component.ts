@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit{
 
     { route: '/', title: 'Home' },
     { route: '/articles', title: 'Articles' },
+    { route: '/signup', title: 'SignUp' },
+    { route: '/signin', title: 'SignIn' },
   ];
   constructor(private router: Router) { }
 

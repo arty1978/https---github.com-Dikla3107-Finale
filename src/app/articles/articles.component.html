@@ -7,23 +7,25 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Article Name</th>
+            <th>Article Title</th>
+            <th>Subtitle</th>
             <th>Article Category</th>
             <th>Author</th>
-            <th>Publish Date</th>
+            <th>Operations</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let a of articles; let i = index" (dblclick)="edit(a)" >
-            <td>{{i + 1}}</td>
-            <td>{{a.articleName}}</td>
-            <td>{{a.articleCategory}}</td>
-            <td>{{a.author}}</td>
-            <td>{{a.publishDate | date : 'dd/MM/yy hh:mm'}}</td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ a.articleTitle }}</td>
+            <td>{{ a.articleSubTitle }}</td>
+            <td>{{ a.articleCategory}}</td>
+            <td>{{ a.author }}</td>
+
             <td>
             <button class="edit" (click)="edit(a)">Edit</button>
             <button class="remove" (click)="remove(a)">Remove</button>
-            </td>
+        </td>
         </tr>
     </tbody>
 </table>

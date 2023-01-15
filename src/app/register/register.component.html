@@ -1,0 +1,33 @@
+<h2>Register a new user</h2>
+
+<form *ngIf="form" class="formFrame" [formGroup]="form">
+    <h3>
+        Fill the form for registartion
+    </h3>
+    <div class="field">
+        <label for="">User Name: </label>
+        <input type="text" formControlName="userName">
+    </div>
+
+    <div class="field">
+        <label for=""> Fullname: </label>
+        <input type="text" formControlName="fullName">
+    </div>
+
+    <div class="field">
+        <label for="">Email: </label>
+        <input type="email" formControlName="email">
+    </div>
+
+    <div class="field">
+        <label for="">Password: </label>
+        <input type="password" formControlName="password"><br>
+    </div>
+    <div class="field">
+        <label for="">Verify your password: </label>
+        <input type="password" formControlName="verifyYourPassword">
+    </div>
+
+    <button (click)="regiButton()">Submit</button>
+
+</form>

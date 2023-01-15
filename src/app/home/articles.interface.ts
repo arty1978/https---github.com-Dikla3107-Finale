@@ -1,5 +1,5 @@
 export interface Articles {
-    _id: any;
+    _id: String;
     articleTitle: String;
     articleSubTitle: String,
     articleCategory: String;

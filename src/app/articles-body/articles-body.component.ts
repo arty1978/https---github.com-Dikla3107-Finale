@@ -15,65 +15,61 @@ export class ArticlesBodyComponent implements OnInit {
   sub: Subscription;
   articles: Articles;
   form: FormGroup;
-  alternativeImage?: string | ArrayBuffer | null;
-  alternativeImageName: string;
+/*   alternativeImage?: string | ArrayBuffer | null;
+  alternativeImageName: string; */
 
 
-  @ViewChild('imageInput')
-  inputElem!: ElementRef<HTMLInputElement>;
+/*   @ViewChild('imageInput')
+  inputElem!: ElementRef<HTMLInputElement>; */
 
-update(){
-  for (const k in this.form.value) {
-    (this.articles as any)[k] = this.form.value[k];
-  }
-  if (this.alternativeImage) {
-    this.articles.image = this.alternativeImage;
-    this.articles.imageName = this.alternativeImageName;
-  }
-
-  const sub = this.http.put<void>("articles", this.articles).subscribe(() => {
-    sub.unsubscribe();
-    this.router.navigate(['articles']);
-  }, (err) => {
-    alert("Error")
-  });
-}
 
 add(){
   const data = this.form.value;
-
-  if (this.alternativeImage) {
-    data.image = this.alternativeImage;
-    data.imageName = this.alternativeImageName;
-  }
-
-  const sub = this.http.post<Articles>("articles", data).subscribe(item => {
+  console.log(this.form.value);
+  
+  const sub = this.http.post<Articles>('articles/create',data).subscribe((item)=>{
     sub.unsubscribe();
     this.router.navigate(['articles']);
-  });
+    console.log(sub, data);
+    
+  })
 }
+
+
+update(){
+  /* for (const k in this.form.value) {
+    (this.articles as any)[k] = this.form.value[k];
+  } */
+  const sub = this.http.put<void>("articles/updatearticle", this.articles).subscribe(() => {
+    sub.unsubscribe();
+    this.router.navigate(['articles']);
+  } ,/*  (err) => {
+    alert("There was a problem")
+  } */);
+}
+
+  
 
 
 buildForm(item: Articles){
 this.form = new FormGroup({
-  articleName: new FormControl(item.articleName, [Validators.required,
+  articleTitle: new FormControl(item.articleTitle, [Validators.required,
+  ]),
+  articleSubTitle: new FormControl(item.articleSubTitle, [Validators.required,
   ]),
   articleCategory: new FormControl(item.articleCategory, [Validators.required,
   ]),
+  body: new FormControl(item.body,[Validators.required,
+  ]),
   author: new FormControl(item.author, [Validators.required,
   ]),
-  publishDate: new FormControl(this.date.transform(item.publishDate, 'yyyy-MM-dd'), [
-    Validators.required,
-  ]),
-  body: new FormControl(item.body, [Validators.required,
-  ]),
-  imgId: new FormControl(item.imgId, [
-    Validators.required,
-  ]),
-})
+}) 
+console.log(this.form);
+
 }
 
-  selectImage() {
+
+ /*  selectImage() {
     this.inputElem.nativeElement.click();
   }
 
@@ -90,32 +86,34 @@ this.form = new FormGroup({
 
       reader.readAsDataURL(files[0]);
     }
-  }
+  } */
 
 
 
-constructor(private http: HttpService, private route: ActivatedRoute, private date: DatePipe, private router: Router) {
+constructor(private http: HttpService, private route: ActivatedRoute, private router: Router) {
     this.sub = this.route.params.subscribe(data => {
-      const id = data['id'];
+      const id:any = data['id'];
 
       if (id) {
-        const sub = this.http.get<Articles>(`articles/${id}`).subscribe(data => {
+        const sub = this.http.get<Articles>(`articles/findone/${id}`).subscribe(data => {
           this.articles = data;
           this.buildForm(this.articles);
           sub.unsubscribe();
         });
       } else {
         this.articles = {
-          id: 0,
-          articleName: '',
+          _id: 0,
+          articleTitle: '',
+          articleSubTitle: '',
           articleCategory:'',
           author: '',
-          publishDate: '',
           body: '',
-          imgId: 0,
+          /* imgId: 0,
+          imageName: '' */
           
         };
-
+        console.log(this.articles);
+        
         this.buildForm(this.articles);
       }
     });

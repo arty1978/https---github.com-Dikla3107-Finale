@@ -12,11 +12,11 @@ export class ArticlesComponent implements OnInit{
   articles: Articles[] = [];
 
   edit(item: Articles) {
-    this.router.navigate(['articles-body', item.id]);
+    this.router.navigate(['articles-body', item._id]);
   }
   remove(item: Articles) {
-    const sub = this.http.delete<void>(`articles/${item.id}`).subscribe(data => {
-      const i = this.articles.findIndex(x => x.id == item.id);
+    const sub = this.http.delete<void>(`articles/deleteone/${item._id}`).subscribe(data => {
+      const i = this.articles.findIndex(x => x._id == item._id);
       this.articles.splice(i, 1);
       sub.unsubscribe();
     });
@@ -24,7 +24,7 @@ export class ArticlesComponent implements OnInit{
   constructor(private http: HttpService, private router: Router) { }
 
   ngOnInit(): void {
-    const sub = this.http.get<Articles[]>('articles').subscribe(data => {
+    const sub = this.http.get<Articles[]>('articles').subscribe((data) => {
       this.articles = data;
       sub.unsubscribe();
     });
