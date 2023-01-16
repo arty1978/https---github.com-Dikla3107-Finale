@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Articles } from '../articles/articles.interface';
 import { HttpService } from '../http.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-articles-body',
@@ -15,6 +16,7 @@ export class ArticlesBodyComponent implements OnInit {
   sub: Subscription;
   articles: Articles;
   form: FormGroup;
+
 /*   alternativeImage?: string | ArrayBuffer | null;
   alternativeImageName: string; */
 
@@ -57,6 +59,8 @@ this.form = new FormGroup({
   ]),
   articleSubTitle: new FormControl(item.articleSubTitle, [Validators.required,
   ]),
+  publishDate: new FormControl(item.publishDate, [Validators.required,
+  ]),
   articleCategory: new FormControl(item.articleCategory, [Validators.required,
   ]),
   body: new FormControl(item.body,[Validators.required,
@@ -90,7 +94,8 @@ console.log(this.form);
 
 
 
-constructor(private http: HttpService, private route: ActivatedRoute, private router: Router) {
+constructor(private http: HttpService, private route: ActivatedRoute, private router: Router, ) {
+
     this.sub = this.route.params.subscribe(data => {
       const id:any = data['id'];
 
@@ -105,6 +110,7 @@ constructor(private http: HttpService, private route: ActivatedRoute, private ro
           _id: 0,
           articleTitle: '',
           articleSubTitle: '',
+          publishDate: new Date(),
           articleCategory:'',
           author: '',
           body: '',

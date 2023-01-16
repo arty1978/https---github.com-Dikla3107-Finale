@@ -9,6 +9,7 @@
             <th>#</th>
             <th>Article Title</th>
             <th>Subtitle</th>
+            <th>Date Published</th>
             <th>Article Category</th>
             <th>Author</th>
             <th>Operations</th>
@@ -19,6 +20,7 @@
             <td>{{ i + 1 }}</td>
             <td>{{ a.articleTitle }}</td>
             <td>{{ a.articleSubTitle }}</td>
+            <td>{{ a.publishDate | date: 'dd/MM/yyyy'}}</td>
             <td>{{ a.articleCategory}}</td>
             <td>{{ a.author }}</td>
 

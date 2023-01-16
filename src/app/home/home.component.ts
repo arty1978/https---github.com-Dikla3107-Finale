@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../http.service';
-import { GridArticles } from '../../../dadad/gridArticles.interface';
 import { Articles } from '../home/articles.interface';
 
 @Component({

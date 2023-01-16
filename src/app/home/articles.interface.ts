@@ -2,6 +2,7 @@ export interface Articles {
     _id: String;
     articleTitle: String;
     articleSubTitle: String,
+    publishDate: Date,
     articleCategory: String;
     body: string;
     author: String;
