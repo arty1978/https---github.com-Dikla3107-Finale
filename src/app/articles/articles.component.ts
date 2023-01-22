@@ -13,6 +13,8 @@ export class ArticlesComponent implements OnInit{
 
   edit(item: Articles) {
     this.router.navigate(['articles-body', item._id]);
+    console.log(item._id, 'edit front');
+    
   }
   remove(item: Articles) {
     const sub = this.http.delete<void>(`articles/deleteone/${item._id}`).subscribe(data => {

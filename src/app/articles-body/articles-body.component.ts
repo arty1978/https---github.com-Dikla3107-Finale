@@ -33,7 +33,6 @@ add(){
     sub.unsubscribe();
     this.router.navigate(['articles']);
     console.log(sub, data);
-    
   })
 }
 
@@ -45,9 +44,7 @@ update(){
   const sub = this.http.put<void>("articles/updatearticle", this.articles).subscribe(() => {
     sub.unsubscribe();
     this.router.navigate(['articles']);
-  } ,/*  (err) => {
-    alert("There was a problem")
-  } */);
+  });
 }
 
   
@@ -59,7 +56,7 @@ this.form = new FormGroup({
   ]),
   articleSubTitle: new FormControl(item.articleSubTitle, [Validators.required,
   ]),
-  publishDate: new FormControl(item.publishDate, [Validators.required,
+  publishDate: new FormControl(item.publishDate, [
   ]),
   articleCategory: new FormControl(item.articleCategory, [Validators.required,
   ]),
@@ -73,34 +70,13 @@ console.log(this.form);
 }
 
 
- /*  selectImage() {
-    this.inputElem.nativeElement.click();
-  }
-
-  imageChange() {
-    const files = this.inputElem.nativeElement.files;
-
-    if (files?.length) {
-      const reader = new FileReader();
-
-      reader.onload = (ev) => {
-        this.alternativeImage = ev.target?.result;
-        this.alternativeImageName = files[0].name;
-      };
-
-      reader.readAsDataURL(files[0]);
-    }
-  } */
-
-
-
 constructor(private http: HttpService, private route: ActivatedRoute, private router: Router, ) {
 
     this.sub = this.route.params.subscribe(data => {
       const id:any = data['id'];
 
       if (id) {
-        const sub = this.http.get<Articles>(`articles/findone/${id}`).subscribe(data => {
+        const sub = this.http.get<Articles>(`articles/findarticle?_id=${id}`).subscribe(data => {
           this.articles = data;
           this.buildForm(this.articles);
           sub.unsubscribe();

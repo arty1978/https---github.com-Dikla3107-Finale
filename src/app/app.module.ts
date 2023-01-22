@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
 import { CheckArticleComponent } from './check-article/check-article.component';
+import { UsersComponent } from './users/users.component';
+import { UtilityService } from './utility.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { CheckArticleComponent } from './check-article/check-article.component';
     ArticlesBodyComponent,
     RegisterComponent,
     SigninComponent,
-    CheckArticleComponent
+    CheckArticleComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { CheckArticleComponent } from './check-article/check-article.component';
   ],
   providers: [
     HttpService,
-    DatePipe
+    DatePipe,
+    UtilityService
   ],
   bootstrap: [AppComponent]
 })

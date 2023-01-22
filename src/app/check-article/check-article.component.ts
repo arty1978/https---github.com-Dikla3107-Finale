@@ -18,8 +18,10 @@ export class CheckArticleComponent {
       const id: any = data['id'];
 
       if (id) {
-        const sub = this.http.get<Articles>(`articles/findone/${id}`).subscribe(data => {
+        const sub = this.http.get<Articles>(`articles/findarticle?_id=${id}`).subscribe(data => {
           this.article = data;
+          console.log(this.article, 'why not see articles');
+          
           sub.unsubscribe();
         });
       } 

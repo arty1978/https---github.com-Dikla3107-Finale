@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Users } from '../users/users.interface';
 import { Menu } from './navbar.interface';
+import { UtilityService } from '../utility.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit{
     { route: '/signup', title: 'SignUp' },
     { route: '/signin', title: 'SignIn' },
   ];
-  constructor(private router: Router) { }
+  constructor(public utility: UtilityService) { }
 
   ngOnInit(): void {
   }

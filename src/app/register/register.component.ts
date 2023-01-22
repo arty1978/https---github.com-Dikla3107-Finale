@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,12 +18,12 @@ export class RegisterComponent {
 
   regiButton() {
     const data = this.form.value;
-    console.log(data, 'data');
+    console.log(data, 'data regibutton');
     
 
     const sub = this.http.post<Register>("users/create", data).subscribe(item => {
       sub.unsubscribe();
-      console.log(sub, "sub");
+      console.log(sub, "sub register");
       
       this.router.navigate(['']);
       
@@ -42,7 +41,7 @@ export class RegisterComponent {
 
       password: new FormControl(item.password, [Validators.required]),
 
-      verifyYourPassword: new FormControl(item.verifyYourPassword, [Validators.required]),
+      passwordConfirmation: new FormControl(item.passwordConfirmation, [Validators.required]),
     });
     console.log(this.form, 'this form');
     
@@ -66,7 +65,7 @@ export class RegisterComponent {
           fullName: '',
           email: '',
           password: '',
-          verifyYourPassword: ''
+          passwordConfirmation: ''
         };
 
           this.buildForm(this.register);
