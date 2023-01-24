@@ -10,7 +10,7 @@ import { UtilityService } from '../utility.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
-
+  user: UtilityService;
   active: string = '';
   menu: Menu[] = [
 
@@ -20,7 +20,10 @@ export class NavbarComponent implements OnInit{
     { route: '/signin', title: 'SignIn' },
   ];
   constructor(public utility: UtilityService) { }
-
+  logout(){
+  }
   ngOnInit(): void {
+    
   }
 }
+

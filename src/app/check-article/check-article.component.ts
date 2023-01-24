@@ -13,16 +13,20 @@ export class CheckArticleComponent {
   sub:Subscription;
   article: Articles;
 
-  constructor(private http: HttpService, private route: ActivatedRoute, private router: Router) {
-    this.sub = this.route.params.subscribe(data => {
+  constructor(private http: HttpService,
+    private route: ActivatedRoute, 
+    private router: Router) {
+
+    this.sub = this.route.params.subscribe((data) => {
       const id: any = data['id'];
 
       if (id) {
-        const sub = this.http.get<Articles>(`articles/findarticle?_id=${id}`).subscribe(data => {
-          this.article = data;
-          console.log(this.article, 'why not see articles');
-          
-          sub.unsubscribe();
+        const sub = this.http
+          .get<Articles>(`articles/findarticle?_id=${id}`)
+          .subscribe((data) => {
+            this.article = data;
+            console.log(this.article, 'full article.ts ');
+            sub.unsubscribe();
         });
       } 
         console.log(this.article);

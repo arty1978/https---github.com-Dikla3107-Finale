@@ -34,7 +34,7 @@ user: Users;
       this.utility.setUser(item.user);
 
         sub.unsubscribe();
-        this.router.navigate(['users']);
+        this.router.navigate(['articles']);
         console.log(sub, 'inside post method signin.ts');
       });
   }

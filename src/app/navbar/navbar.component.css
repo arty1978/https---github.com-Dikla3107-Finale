@@ -18,7 +18,8 @@ a {
     font-weight: bolder;
 }
 .hello{
-    float: right;
+    line-height: 3.13;
+    color: rgb(86, 85, 85);
 }
 a.active {
     background-color: rgb(187, 216, 239);
@@ -31,4 +32,9 @@ a:hover {
 
 a[hidden] {
     display: none;
+}
+
+.btn{
+    margin-left: 6px;
+    padding: -5px;
 }

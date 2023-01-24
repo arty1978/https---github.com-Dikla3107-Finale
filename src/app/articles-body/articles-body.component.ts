@@ -25,27 +25,39 @@ export class ArticlesBodyComponent implements OnInit {
   inputElem!: ElementRef<HTMLInputElement>; */
 
 
-add(){
-  const data = this.form.value;
-  console.log(this.form.value);
-  
-  const sub = this.http.post<Articles>('articles/create',data).subscribe((item)=>{
-    sub.unsubscribe();
-    this.router.navigate(['articles']);
-    console.log(sub, data);
-  })
-}
+  add() {
+    const data = this.form.value;
+
+    const sub = this.http
+      .post<Articles>('articles/create', data)
+      .subscribe((item) => {
+        sub.unsubscribe();
+        this.router.navigate(['articles']);
+      });
+  }
 
 
-update(){
-  /* for (const k in this.form.value) {
-    (this.articles as any)[k] = this.form.value[k];
-  } */
-  const sub = this.http.put<void>("articles/updatearticle", this.articles).subscribe(() => {
-    sub.unsubscribe();
-    this.router.navigate(['articles']);
-  });
-}
+  update() {
+    console.log(this.form);
+
+    for (const k in this.form.value) {
+      (this.articles as any)[k] = this.form.value[k];
+    }
+
+    const sub = this.http
+      .put<void>(`articles/updateone?_id=${this.articles._id}`, this.articles)
+      .pipe()
+      .subscribe(
+        () => {
+          console.log(this.articles, 'put method');
+          sub.unsubscribe();
+          this.router.navigate(['articles']);
+        }
+        // (err) => {
+        //   alert('חביבי, הייתה שגיאה!');
+        // }
+      );
+  }
 
   
 
@@ -76,17 +88,22 @@ constructor(private http: HttpService, private route: ActivatedRoute, private ro
       const id:any = data['id'];
 
       if (id) {
-        const sub = this.http.get<Articles>(`articles/findarticle?_id=${id}`).subscribe(data => {
-          this.articles = data;
-          this.buildForm(this.articles);
-          sub.unsubscribe();
-        });
+        const sub = this.http
+          .get<Articles>(`articles/findArticle?_id=${id}`)
+          .subscribe((data) => {
+            console.log(sub, 'line 107 in the get method');
+            this.articles = data;
+            console.log(this.articles);
+
+            this.buildForm(this.articles);
+            sub.unsubscribe();
+          });
       } else {
         this.articles = {
           _id: 0,
           articleTitle: '',
           articleSubTitle: '',
-          publishDate: new Date(),
+          publishDate: '',
           articleCategory:'',
           author: '',
           body: '',

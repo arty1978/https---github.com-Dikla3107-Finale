@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HttpService } from '../http.service';
+import { Users } from '../users/users.interface';
 import { Register } from './registrer.interface';
 
 @Component({
@@ -12,7 +13,7 @@ import { Register } from './registrer.interface';
 })
 export class RegisterComponent {
   form: FormGroup;
-  register: Register;
+  user: Users;
   sub: Subscription;
 
 
@@ -21,16 +22,16 @@ export class RegisterComponent {
     console.log(data, 'data regibutton');
     
 
-    const sub = this.http.post<Register>("users/create", data).subscribe(item => {
+    const sub = this.http.post<Users>("users/create", data).subscribe(item => {
       sub.unsubscribe();
       console.log(sub, "sub register");
       
-      this.router.navigate(['']);
+      this.router.navigate(['users']);
       
-    })  
+    });
   } 
 
-  buildForm(item: Register) {
+  buildForm(item: Users) {
     this.form = new FormGroup({
 
       userName: new FormControl(item.userName, [Validators.required]),
@@ -41,35 +42,44 @@ export class RegisterComponent {
 
       password: new FormControl(item.password, [Validators.required]),
 
-      passwordConfirmation: new FormControl(item.passwordConfirmation, [Validators.required]),
-    });
-    console.log(this.form, 'this form');
-    
-  }
+      passwordConfirmation: new FormControl('', {
+        validators: [Validators.required, this.passwordMatchValidator],
+    })
+  });
+}
 
+    passwordMatchValidator(form: FormControl): { [key: string]: any } | null {
+      const password = form.value;
+      const passwordConfirmation = form.value;
+
+      if(password !== passwordConfirmation) {
+      return { passwordMismatch: true };
+    } else {
+      return null;
+    }
+  }
 
   constructor(private http: HttpService, private route: ActivatedRoute, private router: Router,) {
     this.sub = this.route.params.subscribe(data => {
       const id: any = data['id'];
 
       if (id) {
-        const sub = this.http.get<Register>(`/users/find/${id}`).subscribe(data => {
-          this.register = data;
-          this.buildForm(this.register);
+        const sub = this.http.get<Users>(`users/finduser/${id}`).subscribe(data => {
+          this.user = data;
+          this.buildForm(this.user);
           sub.unsubscribe();
         });
       } else {
-        this.register = {
+        this.user = {
           _id: 0,
           userName: '',
           fullName: '',
           email: '',
           password: '',
-          passwordConfirmation: ''
         };
 
-          this.buildForm(this.register);
-          console.log(this.register, 'this register constructor');
+          this.buildForm(this.user);
+          console.log(this.user, 'this register constructor');
           
       }
     });
@@ -83,5 +93,3 @@ export class RegisterComponent {
   }
 
 }
-
-
