@@ -1,29 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { Users } from '../users/users.interface';
 import { Menu } from './navbar.interface';
 import { UtilityService } from '../utility.service';
+import { NavigationEnd, Router } from '@angular/router';
+
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
+
   user: UtilityService;
   active: string = '';
   menu: Menu[] = [
 
     { route: '/', title: 'Home' },
-    { route: '/articles', title: 'Articles' },
-    { route: '/signup', title: 'SignUp' },
-    { route: '/signin', title: 'SignIn' },
+    { route: '/articles', title: 'Articles', isConnected: true },
+    /* { route: '/signup', title: 'SignUp' },
+    { route: '/signin', title: 'SignIn' }, */
   ];
-  constructor(public utility: UtilityService) { }
-  logout(){
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.utility.removeUser();
+  }
+  constructor(public utility: UtilityService, private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.active = event.url;
+      }
+    })
   }
   ngOnInit(): void {
-    
+
   }
 }
 

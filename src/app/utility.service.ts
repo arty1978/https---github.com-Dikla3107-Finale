@@ -5,7 +5,7 @@ import { Users } from './users/users.interface';
     providedIn: 'root'
 })
 export class UtilityService {
-    private user?: Users;
+    public user?: Users;
 
     setUser(user?: Users) {
         this.user = user;
@@ -13,6 +13,9 @@ export class UtilityService {
 
     getUser() {
         return this.user;
+    }
+    removeUser() {
+        this.user = undefined;
     }
 
     constructor() { }

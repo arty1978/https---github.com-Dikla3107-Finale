@@ -9,7 +9,7 @@ import { Register } from './registrer.interface';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
   form: FormGroup;
@@ -20,16 +20,16 @@ export class RegisterComponent {
   regiButton() {
     const data = this.form.value;
     console.log(data, 'data regibutton');
-    
+
 
     const sub = this.http.post<Users>("users/create", data).subscribe(item => {
       sub.unsubscribe();
       console.log(sub, "sub register");
-      
+
       this.router.navigate(['users']);
-      
+
     });
-  } 
+  }
 
   buildForm(item: Users) {
     this.form = new FormGroup({
@@ -44,15 +44,15 @@ export class RegisterComponent {
 
       passwordConfirmation: new FormControl('', {
         validators: [Validators.required, this.passwordMatchValidator],
-    })
-  });
-}
+      })
+    });
+  }
 
-    passwordMatchValidator(form: FormControl): { [key: string]: any } | null {
-      const password = form.value;
-      const passwordConfirmation = form.value;
+  passwordMatchValidator(form: FormGroup): { [key: string]: any } | null {
+    const password = form.get('password')?.value;
+    const passwordConfirmation = form.get('passwordConfirmation')?.value;
 
-      if(password !== passwordConfirmation) {
+    if (password !== passwordConfirmation) {
       return { passwordMismatch: true };
     } else {
       return null;
@@ -60,6 +60,7 @@ export class RegisterComponent {
   }
 
   constructor(private http: HttpService, private route: ActivatedRoute, private router: Router,) {
+
     this.sub = this.route.params.subscribe(data => {
       const id: any = data['id'];
 
@@ -78,9 +79,9 @@ export class RegisterComponent {
           password: '',
         };
 
-          this.buildForm(this.user);
-          console.log(this.user, 'this register constructor');
-          
+        this.buildForm(this.user);
+        console.log(this.user, 'this register constructor');
+
       }
     });
   }

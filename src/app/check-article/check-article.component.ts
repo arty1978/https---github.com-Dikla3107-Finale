@@ -7,14 +7,14 @@ import { HttpService } from '../http.service';
 @Component({
   selector: 'app-check-article',
   templateUrl: './check-article.component.html',
-  styleUrls: ['./check-article.component.css']
+  styleUrls: ['./check-article.component.scss']
 })
 export class CheckArticleComponent {
-  sub:Subscription;
+  sub: Subscription;
   article: Articles;
 
   constructor(private http: HttpService,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private router: Router) {
 
     this.sub = this.route.params.subscribe((data) => {
@@ -27,9 +27,9 @@ export class CheckArticleComponent {
             this.article = data;
             console.log(this.article, 'full article.ts ');
             sub.unsubscribe();
-        });
-      } 
-        console.log(this.article);
+          });
+      }
+      console.log(this.article);
     });
   }
 }

@@ -21,10 +21,10 @@
 </div>
 
 
-<div>
+<!-- <div>
     <label class="field">Author:</label>
     <input type="text" formControlName="author">
-</div>
+</div> -->
 
 
 <div class="field">
@@ -32,28 +32,8 @@
         <textarea formControlName="body" cols="30" rows="10" class="ta"></textarea>
     </div>
 
-
-<!-- <input #imageInput [hidden]="true" type="file" (change)="imageChange()">
- -->
-    <!-- <div *ngIf="articles.imgId">
-        <img [src]="'http://localhost:4000/articles/image/' + articles.imgId" class="editImg" 
-        (click)="selectImage()">
-    </div> -->
-
-    <!-- <div *ngIf="alternativeImage">
-        <h3 *ngIf="articles.imgId">Change Image</h3>
-        <img [src]="alternativeImage" class="editImg" (click)="selectImage()">
-    </div> -->
-
-    <!-- <div *ngIf="!articles.imgId && !alternativeImage" class="editImg">
-        <button (click)="selectImage()">Upload Image</button>
-    </div> -->
-
-
-
-
 <div class="field">
-        <button *ngIf="articles._id" (click)="update()" [disabled]="!form.valid" class="BTN">Update</button>
-        <button *ngIf="!articles._id" (click)="add()" [disabled]="!form.valid" class="BTN">Add</button>
+        <button *ngIf="articles._id" (click)="update()" [disabled]="!form.valid" class="BTN">Save</button>
+        <button *ngIf="!articles._id" (click)="add()"  class="BTN">Add</button>
     </div>
 </form>

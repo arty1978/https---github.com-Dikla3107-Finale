@@ -10,15 +10,15 @@ import { SignInResult } from './signInResult.interface';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent {
-form: FormGroup;
-sub: Subscription;
-user: Users;
+  form: FormGroup;
+  sub: Subscription;
+  user: Users;
 
 
-  signInButton(){
+  signInButton() {
     const data = {
       email: this.form.value.email,
       password: this.form.value.password,
@@ -28,10 +28,14 @@ user: Users;
     const sub = this.http
       .post<SignInResult>('users/signin', data)
       .subscribe((item) => {
-        localStorage.setItem('token', item.token);
+        console.log(item, '!!!');
 
-      this.http.setToken();
-      this.utility.setUser(item.user);
+        localStorage.setItem('token', item.token);
+        localStorage.setItem('user', JSON.stringify(item.user));
+
+        console.log(item, 'token of logged user');
+        this.http.setToken();
+        this.utility.setUser(item.user);
 
         sub.unsubscribe();
         this.router.navigate(['articles']);

@@ -18,7 +18,6 @@ import { SigninComponent } from './signin/signin.component';
 import { CheckArticleComponent } from './check-article/check-article.component';
 import { UsersComponent } from './users/users.component';
 import { UtilityService } from './utility.service';
-import { NoSignInComponent } from './no-sign-in/no-sign-in.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +30,8 @@ import { NoSignInComponent } from './no-sign-in/no-sign-in.component';
     SigninComponent,
     CheckArticleComponent,
     UsersComponent,
-    NoSignInComponent
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,

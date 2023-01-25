@@ -1,10 +1,16 @@
 <nav>
-    <a *ngFor="let item of menu" [class.active]="active == item.route" [routerLink]="item.route">{{item.title}} </a>
+    <a *ngFor="let item of menu" 
+    [class.active]="active == item.route" 
+    [routerLink]="item.route"
+    [hidden]="item.isConnected && !utility.user">{{item.title}} </a>
 
-    <div class="hello" *ngIf="utility.getUser()">
-    Welcome {{ utility.getUser()?.userName }}
-    </div>
+    <p *ngIf="!utility.user">
+    <a routerLink="signin">Login</a> 
+    <a routerLink="signup">Sign up</a>
+    </p>
 
-    <button class="btn" (click)="logout()">Logout</button>
-
+    <a  *ngIf="utility.user"routerLink="" (click)="logout()">Logout</a>
+  
+  <a>Welcome {{ utility.user ? utility.user.fullName : "Dear Visitor" }}!</a>
 </nav>
+

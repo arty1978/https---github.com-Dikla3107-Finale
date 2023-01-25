@@ -3,7 +3,6 @@ import { ArticlesBodyComponent } from "./articles-body/articles-body.component";
 import { ArticlesComponent } from "./articles/articles.component";
 import { CheckArticleComponent } from "./check-article/check-article.component";
 import { HomeComponent } from "./home/home.component";
-import { NoSignInComponent } from "./no-sign-in/no-sign-in.component";
 import { RegisterComponent } from "./register/register.component";
 import { SigninComponent } from "./signin/signin.component";
 
@@ -21,7 +20,6 @@ export const routes: Routes =[
     { path: 'signin', component: SigninComponent },
     { path: 'checkarticle/:id', component: CheckArticleComponent },
     { path: 'users', component: UsersComponent },
-    { path: 'didnt sign in', component: NoSignInComponent },
     
 
 

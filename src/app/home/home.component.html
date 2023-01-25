@@ -12,13 +12,13 @@
 
 <div class="wraper">
 <div class="gridContainer" >
-    <div *ngFor="let a of articles.slice(-9); let i = index" class="item{{i + 1}}">
+    <div *ngFor="let a of articles.slice(-9).reverse(); let i = index" class="item{{i + 1}}">
         <a class="button" [routerLink]="['checkarticle',a._id]" style="text-decoration:none; color:inherit">
             <span style="text-decoration: underline;">Article Title</span>:  {{a.articleTitle}} <br>
             <span style="text-decoration: underline;">Article SubTitle</span>: {{a.articleSubTitle}}<br>
             <span style="text-decoration: underline;">Article Category</span>: {{a.articleCategory}}<br>
             <span style="text-decoration: underline;">Article Author</span>: {{a.author}} <br>
-            <span style="text-decoration: underline;">Date Published</span>: {{a.publishDate}}
+            <span style="text-decoration: underline;">Date Published</span>: {{a.createdAt}}
         </a>
         </div>
         

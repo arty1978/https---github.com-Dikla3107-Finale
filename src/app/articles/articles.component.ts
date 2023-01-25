@@ -6,19 +6,16 @@ import { Articles } from './articles.interface';
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css']
+  styleUrls: ['./articles.component.scss']
 })
-export class ArticlesComponent implements OnInit{
+export class ArticlesComponent implements OnInit {
   articles: Articles[] = [];
 
   edit(item: Articles) {
-    const token = localStorage.getItem('token');
-    if(!token){
-      this.router.navigate(['didnt sign in']);
-    }else{
-      this.router.navigate(['articles-body', item._id]);
-      console.log(item._id, 'edit front');
-    } 
+
+    this.router.navigate(['articles-body', item._id]);
+    console.log(item._id, 'edit front');
+
   }
   remove(item: Articles) {
     console.log(item);

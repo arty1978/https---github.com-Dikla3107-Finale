@@ -6,24 +6,18 @@ import { Subscription } from 'rxjs';
 import { Articles } from '../articles/articles.interface';
 import { HttpService } from '../http.service';
 import { formatDate } from '@angular/common';
+import { Users } from '../users/users.interface';
 
 @Component({
   selector: 'app-articles-body',
   templateUrl: './articles-body.component.html',
-  styleUrls: ['./articles-body.component.css']
+  styleUrls: ['./articles-body.component.scss']
 })
 export class ArticlesBodyComponent implements OnInit {
   sub: Subscription;
   articles: Articles;
   form: FormGroup;
-
-/*   alternativeImage?: string | ArrayBuffer | null;
-  alternativeImageName: string; */
-
-
-/*   @ViewChild('imageInput')
-  inputElem!: ElementRef<HTMLInputElement>; */
-
+  author: Users;
 
   add() {
     const data = this.form.value;
@@ -53,43 +47,37 @@ export class ArticlesBodyComponent implements OnInit {
           sub.unsubscribe();
           this.router.navigate(['articles']);
         }
-        // (err) => {
-        //   alert('חביבי, הייתה שגיאה!');
-        // }
       );
   }
 
-  
+  buildForm(item: Articles) {
+    this.form = new FormGroup({
+      articleTitle: new FormControl(item.articleTitle, [Validators.required,
+      ]),
+      articleSubTitle: new FormControl(item.articleSubTitle, [Validators.required,
+      ]),
+      createdAt: new FormControl(item.createdAt, [
+      ]),
+      articleCategory: new FormControl(item.articleCategory, [Validators.required,
+      ]),
+      body: new FormControl(item.body, [Validators.required,
+      ]),
+      /* author: new FormControl(item.author, [Validators.required,
+      ]), */
+    })
+    console.log(this.form);
+
+  }
 
 
-buildForm(item: Articles){
-this.form = new FormGroup({
-  articleTitle: new FormControl(item.articleTitle, [Validators.required,
-  ]),
-  articleSubTitle: new FormControl(item.articleSubTitle, [Validators.required,
-  ]),
-  publishDate: new FormControl(item.publishDate, [
-  ]),
-  articleCategory: new FormControl(item.articleCategory, [Validators.required,
-  ]),
-  body: new FormControl(item.body,[Validators.required,
-  ]),
-  author: new FormControl(item.author, [Validators.required,
-  ]),
-}) 
-console.log(this.form);
-
-}
-
-
-constructor(private http: HttpService, private route: ActivatedRoute, private router: Router, ) {
+  constructor(private http: HttpService, private route: ActivatedRoute, private router: Router,) {
 
     this.sub = this.route.params.subscribe(data => {
-      const id:any = data['id'];
+      const id: any = data['id'];
 
       if (id) {
         const sub = this.http
-          .get<Articles>(`articles/findArticle?_id=${id}`)
+          .get<Articles>(`articles/findOneArticle?_id=${id}`)
           .subscribe((data) => {
             console.log(sub, 'line 107 in the get method');
             this.articles = data;
@@ -103,26 +91,26 @@ constructor(private http: HttpService, private route: ActivatedRoute, private ro
           _id: 0,
           articleTitle: '',
           articleSubTitle: '',
-          publishDate: '',
-          articleCategory:'',
+          createdAt: '',
+          articleCategory: '',
           author: '',
           body: '',
           /* imgId: 0,
           imageName: '' */
-          
+
         };
         console.log(this.articles);
-        
+
         this.buildForm(this.articles);
       }
     });
-}
-ngOnInit() {
-}
+  }
+  ngOnInit() {
+  }
 
-ngOnDestroy() {
-  this.sub.unsubscribe();
-}
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
 }
 
