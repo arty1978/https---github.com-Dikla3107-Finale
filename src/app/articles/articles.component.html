@@ -1,6 +1,8 @@
-<h2>Articles Management</h2>
+<h2>Here you can find all of your articles. You can edit each Article or remove it.</h2>
 <br>
+<div class="">
 <button routerLink="/articles-body" class="newArticleButton">New Article</button>
+</div>
 <br>
 
 <table>
@@ -29,5 +31,17 @@
         </tr>
     </tbody>
 </table>
+
+
+    <div class="card" *ngFor="let a of articles.reverse(); let i = index" (dblclick)="edit(a)">
+
+    <p> <span style="text-decoration: underline;">Article title</span>: {{ a.articleTitle }}</p>
+    <p> <span style="text-decoration: underline;"> article SubTitle</span>:{{ a.articleSubTitle }}</p>
+    <p> <span style="text-decoration: underline;">Article Category</span>: {{ a.articleCategory}}</p>
+    <p><span style="text-decoration: underline;"> Author</span>: {{ a.author }}</p>
+    <button class="edit" (click)="edit(a)">Edit</button>
+    <button class="remove" (click)="remove(a)">Remove</button>
+    </div>
+
 
 

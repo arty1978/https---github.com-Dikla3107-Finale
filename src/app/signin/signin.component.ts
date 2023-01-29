@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,6 @@ export class SigninComponent {
   form: FormGroup;
   sub: Subscription;
   user: Users;
-
 
   signInButton() {
     const data = {
@@ -49,15 +48,20 @@ export class SigninComponent {
         Validators.email,
       ]),
       password: new FormControl(item.password, [Validators.required]),
-    });
+    },
+    );
+    
   }
   constructor(
     private http: HttpService,
     private route: ActivatedRoute,
     private router: Router,
     public utility: UtilityService
+    
 
-  ) {
+  ) 
+  
+  {
     this.user = {
       _id: 0,
       userName: '',

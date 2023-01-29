@@ -6,6 +6,7 @@ import { Users } from './users/users.interface';
 })
 export class UtilityService {
     public user?: Users;
+    isNavOpen = true;
 
     setUser(user?: Users) {
         this.user = user;

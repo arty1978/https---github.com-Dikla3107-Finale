@@ -19,6 +19,7 @@ import { CheckArticleComponent } from './check-article/check-article.component';
 import { UsersComponent } from './users/users.component';
 import { UtilityService } from './utility.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,11 +41,14 @@ import { UtilityService } from './utility.service';
     FormsModule,
     ReactiveFormsModule,
     
+
+    
   ],
   providers: [
     HttpService,
     DatePipe,
-    UtilityService
+    UtilityService,
+    
   ],
   bootstrap: [AppComponent]
 })

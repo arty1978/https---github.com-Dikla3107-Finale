@@ -1,16 +1,35 @@
 <nav>
+
     <a *ngFor="let item of menu" 
     [class.active]="active == item.route" 
     [routerLink]="item.route"
     [hidden]="item.isConnected && !utility.user">{{item.title}} </a>
+
+    
 
     <p *ngIf="!utility.user">
     <a routerLink="signin">Login</a> 
     <a routerLink="signup">Sign up</a>
     </p>
 
-    <a  *ngIf="utility.user"routerLink="" (click)="logout()">Logout</a>
+    <a *ngIf="utility.user"routerLink="" (click)="logout()">Logout</a>
   
   <a>Welcome {{ utility.user ? utility.user.fullName : "Dear Visitor" }}!</a>
+  </nav>
+
+  <div class="burgerContainer">
+<div class="burger" (click)="openNav()">&nbsp; &#9776;</div>
+</div>
+  
+<nav class="sidenav" [style.width]="utility.isNavOpen ? '150px' : 0">
+  
+  <a class="closebtn" (click)="closeNav()">&times;</a>
+  <p *ngIf="!utility.user"></p>
+  <a routerLink="">Home</a>
+  <a routerLink="signin">Login</a>
+  <a routerLink="signup">SignUp</a>
 </nav>
+
+
+
 

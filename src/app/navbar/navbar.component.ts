@@ -12,6 +12,8 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+
+
   user: UtilityService;
   active: string = '';
   menu: Menu[] = [
@@ -21,12 +23,21 @@ export class NavbarComponent implements OnInit {
     /* { route: '/signup', title: 'SignUp' },
     { route: '/signin', title: 'SignIn' }, */
   ];
+  
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.utility.removeUser();
   }
+
+  closeNav(){
+    this.utility.isNavOpen = false;
+  }
+  openNav(){
+    this.utility.isNavOpen = true;
+  }
+  
   constructor(public utility: UtilityService, private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
